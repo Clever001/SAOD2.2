@@ -13,27 +13,53 @@ int main()
 {
     setlocale(LC_ALL, "Rus");
     Stack<double> stack;
-    double buf;
+    const int pos1 = 1, pos2 = 2;
+    const bool fromStart = false;
+    double sum = 0.0, buf;
     while (cin >> buf) {
         stack.Push(buf);
     }
-    if (stack.Size() < 3) {
-        cout << "В стеке слишком мало чисел. Невозможно выполнить поставленную операцию." << '\n';
+
+    int size = stack.Size();
+    if (size < (pos1 + 1) || size < (pos2 + 1)) {
+        cout << "Недостаточно элементов.\n";
         return 0;
     }
+    if (fromStart) {
+        int curPos = size - 1;
+        double num1 = -1.0, num2 = -1.0;
+        while (!stack.Empty() && (num1 == -1.0 || num2 == -1.0)) {
+            if (curPos == pos1)
+                num1 = stack.Top();
+            else if (curPos == pos2)
+                num2 = stack.Top();
+            --curPos;
+            stack.Pop();
+        }
+        if (num1 != -1.0 && num2 != -1.0)
+            stack.Push((num1 + num2) / 2.0);
+    }
+    else {
+        int curPos = 0;
+        double num1 = -1.0, num2 = -1.0;
+        while (!stack.Empty() && (num1 == -1.0 || num2 == -1.0)) {
+            if (curPos == pos1)
+                num1 = stack.Top();
+            else if (curPos == pos2)
+                num2 = stack.Top();
+            ++curPos;
+            stack.Pop();
+        }
+        if (num1 != -1.0 && num2 != -1.0)
+            stack.Push((num1 + num2) / 2.0);
 
-    cout << "Вывод первоначального стека.\n";
+    }
+
     for (auto item : stack) {
         cout << item << ' ';
     }
-    cout << '\n';
+    
 
-    double result = (stack[1] + stack[2]) / 2.0;
-    stack.Push(result);
-
-    cout << "Вывод измененного стека.\n";
-    for (auto item : stack) {
-        cout << item << ' ';
-    }
+    
     cout << '\n';
 }

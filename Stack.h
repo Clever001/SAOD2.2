@@ -13,17 +13,11 @@ public:
 	}
 
 	T Top() const {
-		if (vec.empty())
-			throw range_error();
 		return vec[vec.size() - 1];
 	}
 
 	void Pop() {
 		vec.pop_back();
-	}
-
-	T operator [] (size_t index) {
-		return vec[index];
 	}
 
 	size_t Size() {
