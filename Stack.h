@@ -8,23 +8,23 @@ class Stack {
 private:
 	vector<T> vec;
 public:
-	void Push(const T& item) {
+	void push(const T& item) {
 		vec.push_back(item);
 	}
 
-	T Top() const {
+	T top() const {
 		return vec[vec.size() - 1];
 	}
 
-	void Pop() {
+	void pop() {
 		vec.pop_back();
 	}
 
-	size_t Size() {
+	size_t size() {
 		return vec.size();
 	}
 
-	bool Empty() {
+	bool empty() {
 		return vec.empty();
 	}
 
